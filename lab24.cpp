@@ -47,7 +47,8 @@ ComplexNumber ComplexNumber::operator/(const ComplexNumber &c){
 	return ComplexNumber(((real*c.real)+(imag*c.imag))/o,((real*c.imag)-(imag*c.real))/o);
 }
 ComplexNumber operator/(double real,const ComplexNumber &c){
-	return ComplexNumber(c.real/real,c.imag/real);
+	double o = pow(c.real,2)+pow(c.imag,2);
+	return ComplexNumber((real*c.real)/o,(real*c.imag)/o);
 }
 bool ComplexNumber::operator==(const ComplexNumber &c)
 {
@@ -66,7 +67,7 @@ double ComplexNumber::abs()
 }
 
 double ComplexNumber::angle(){
-	return atan(imag/real);
+	return atan2(imag,real)*(180/3.14159);
 }
 //Write your code here
 
