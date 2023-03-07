@@ -42,6 +42,22 @@ ComplexNumber ComplexNumber::operator*(const ComplexNumber &c){
 ComplexNumber operator*(double real,const ComplexNumber &c){
 	return ComplexNumber(real*c.real,real*c.imag);
 }
+
+// ComplexNumber ComplexNumber::operator/(const ComplexNumber &c){
+// 	return ComplexNumber((real*c.real+imag*c.imag)/(pow(c.real,2)+pow(c.imag,2)),(imag*c.real-real*c.imag)/(pow(c.real,2)+pow(c.imag,2)));
+// }
+
+// ComplexNumber operator/(double x,ComplexNumber c){
+// 	return ComplexNumber((x*c.real)/(pow(c.real,2)+pow(c.imag,2)),(-x*c.imag)/(pow(c.real,2)+pow(c.imag,2)));
+// }
+
+
+
+
+
+
+
+
 ComplexNumber ComplexNumber::operator/(const ComplexNumber &c){
 	double o = pow(c.real,2)+pow(c.imag,2);
 	return ComplexNumber(((real*c.real)+(imag*c.imag))/o,((real*c.imag)-(imag*c.real))/o);
@@ -73,20 +89,12 @@ double ComplexNumber::angle(){
 
 ostream & operator<<(ostream &os, const ComplexNumber &c){
 	
-	if(c.imag > 0 && c.real != 0)
-	{
-        return os << c.real << "+" << c.imag <<"i";
-	} 
-	else if(c.imag < 0 && c.real != 0)
-	{
-		return os << c.real << c.imag <<"i";
-	}
-	else if(c.real == 0 or c.imag == 0) 
-	{
-		if(c.real == 0 && c.imag != 0) return os << c.imag << "i";
-		else if(c.imag == 0 && c.real != 0) return os << c.real ;
-		else return os << 0;
-	}
+	string s = (c.imag >= 0) && (c.real != 0) && (c.imag != 0) ? "+" : "";
+	if (c.real == 0 && c.imag == 0) os << 0;
+	else if (c.real == 0) os << c.imag << "i";
+	else if (c.imag == 0) os << c.real;
+	else os << c.real << s << c.imag << "i";
+	return os;
 	
 }
 
